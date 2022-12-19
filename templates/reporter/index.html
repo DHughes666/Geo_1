@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+    {% load leaflet_tags %}
+    <head>
+        {% leaflet_js %}
+        {% leaflet_css %}
+        <title>Our Home</title>
+        <style type="text/css">
+            #gis {width: 80%; height: 700px;}
+        </style>
+        <script type="text/javascript" src="{% static 'dist/leaflet.ajax.js' %}"></script>
+    </head>
+
+    <body>
+        <h2>We are heroes!</h2>
+        <br>
+        <script type="text/javascript">
+            function our_layers(map,options) {
+                let datasets = new L.GeoJSON.AJAX("{% url 'airport' %}", {});
+                datasets.addTo(map);
+            }
+        </script>
+        {% leaflet_map 'gis' %}
+    </body>
+</html>
